@@ -26,7 +26,7 @@ function App() {
         {/* For each object in the array, return a list item (<li>) with: */}
         {/* -an id value (as its key attribute) */}
         {/* -a title value (displays inner text content) */}
-        {todoList.map(function (item) {
+        {todoList.map((item) => {
           return <li key={item.id}>{item.title}</li>;
         })}
       </ul>
