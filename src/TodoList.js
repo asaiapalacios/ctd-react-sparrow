@@ -1,4 +1,5 @@
 import React from "react";
+import TodoListItem from "./TodoListItem";
 
 const todoList = [
   {
@@ -18,19 +19,14 @@ const todoList = [
 // For each item in the todoList array, return a list item <li> with:
 // -the id (its key attribute value); and
 // -the title (displays text in the browser)
-let TodoList = () => {
+function TodoList() {
   return (
     <ul>
-      {todoList.map((todo) => (
-        <li key={todo.id}>{todo.title}</li>
-      ))}
+      {todoList.map((todo) => {
+        return <TodoListItem key={todo.id} todo={todo} />;
+      })}
     </ul>
-
-    // Example of implicit return statement as one line (another way of returning same JSX)
-    // <ul>
-    //   {todoList.map((item) => <li key={item.id}>{item.title}</li> )}
-    // </ul>
   );
-};
+}
 
 export default TodoList;
