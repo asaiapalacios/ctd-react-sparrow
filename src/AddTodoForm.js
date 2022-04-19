@@ -1,31 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 
-function AddTodoForm(props) {
-  const handleAddTodo = (event) => {
+function AddTodoForm({ onAddTodo }) {
+  // A place to store (todoTitle state) what user types in input field; initially empty
+  const [todoTitle, setTodoTitle] = useState("");
+
+  // 2) todoTitle state gets updated (initally an empty string):
+  // -> state will store current value user typed in input field
+  let handleTitleChange = (e) => {
+    // console.log(e);
+    // Retrieve user's input field value (text typed)
+    let newTodoTitle = e.target.value;
+    // Update state -> newTodoTitle *IS* todoTitle
+    setTodoTitle(newTodoTitle);
+  };
+  // todoTitle state now updated to current state
+  console.log(todoTitle);
+
+  // 5) Goal: pass object (current state of user input + unique no.) to <AddTodoForm />
+  let handleAddTodo = (e) => {
     // Prevent the browser from executing the default behavior of the form submit
     // i.e., form won't be sent to another location & page won't be refreshed
-    event.preventDefault();
-    // Retrieve the user's input (value) of this specific input field
-    let todoTitle = event.target.title.value;
-    console.log(todoTitle);
-    // Reset form so the text input value is cleared
-    event.target.reset();
-    // Invoke the onAddTodo callback prop and pass newTodo as an argument back to App component
-    props.onAddTodo(todoTitle);
+    e.preventDefault();
+    // Pass object to <AddTodoForm /> in App component (onAddTodo *IS* addTodo handler func reference)
+    onAddTodo({
+      title: todoTitle,
+      id: Date.now(),
+    });
+    // Reset todoTitle state to an empty string (to clear value) each time user submits form
+    setTodoTitle("");
   };
 
   return (
-    // The browser will (2):
-    // 1) Create an event object when...
-    // -the user types a value in the input field; and
-    // -presses the Enter key or selects the Add button to submit.
-
-    // 2) Put details into...
-    // -the event object; then
-    // -pass it as an argument (event) to the handler (handleAddTodo).
+    // 4) When user SUBMITS a typed input, an (e) obj is passed to handler func reference handleAddTodo
     <form onSubmit={handleAddTodo}>
       <label htmlFor="todoTitle">Title </label>
-      <input type="text" id="todoTitle" name="title"></input>
+      <input
+        type="text"
+        id="todoTitle"
+        name="title"
+        // 3) Typed value coming from updated state (controlled input, our "one source of truth")...
+        //    as opposed to value coming from input element's native behavior
+        value={todoTitle}
+        // 1) User TYPES into input field -> (e) obj is created -> (e) is passed to handler func reference
+        onChange={handleTitleChange}
+      />
       <button type="submit">Add</button>
     </form>
   );
