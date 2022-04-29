@@ -8,7 +8,7 @@ const useSemiPersistentState = () => {
   // getItem which *reads* an object from local storage
   // Note: use JSON API to transform (JSON.parse()) item(s) back from string to JavaScript object
   const [todoList, setTodoList] = useState(
-    JSON.parse(localStorage.getItem("savedTodoList"))
+    JSON.parse(localStorage.getItem("savedTodoList")) || []
   );
   // *Write*/save to browser local storage the state value in str when todoList state changes
   useEffect(() => {
