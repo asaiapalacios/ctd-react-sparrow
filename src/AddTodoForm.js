@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import InputWithLabel from "./InputWithLabel";
 
 function AddTodoForm({ onAddTodo }) {
-  // A place to store (todoTitle state) what user types in input field; initially empty
+  // A place to store what user types in input field: todoTitle state; initially empty
   const [todoTitle, setTodoTitle] = useState("");
 
   // 2) todoTitle state gets updated (initally an empty string):
@@ -21,7 +22,7 @@ function AddTodoForm({ onAddTodo }) {
     // Prevent the browser from executing the default behavior of the form submit
     // i.e., form won't be sent to another location & page won't be refreshed
     e.preventDefault();
-    // Pass object to <AddTodoForm /> in App component (onAddTodo *IS* addTodo handler func reference)
+    // Pass object to <AddTodoForm /> in App component (onAddTodo *IS* addTodo reference to handler func)
     onAddTodo({
       title: todoTitle,
       id: Date.now(),
@@ -33,17 +34,14 @@ function AddTodoForm({ onAddTodo }) {
   return (
     // 4) When user SUBMITS a typed input, an (e) obj is passed to handler func reference handleAddTodo
     <form onSubmit={handleAddTodo}>
-      <label htmlFor="todoTitle">Title </label>
-      <input
-        type="text"
-        id="todoTitle"
-        name="title"
-        // 3) Typed value coming from updated state (controlled input, our "one source of truth")...
-        //    as opposed to value coming from input element's native behavior
-        value={todoTitle}
-        // 1) User TYPES into input field -> (e) obj is created -> (e) is passed to handler func reference
-        onChange={handleTitleChange}
-      />
+      <InputWithLabel
+        // 3) Send updated state, todoTitle, to value attribute of InputWithLabel component
+        todoTitle={todoTitle}
+        // 1) Receive back (e) obj from InputWithLabel component, now passed as an arg to event handler
+        handleTitleChange={handleTitleChange}
+      >
+        Title
+      </InputWithLabel>
       <button type="submit">Add</button>
     </form>
   );
