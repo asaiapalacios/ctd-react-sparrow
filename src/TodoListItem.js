@@ -1,8 +1,16 @@
 import React from "react";
 
 // Return title/input field value (what user typed and submitted) in <li>
-function TodoListItem({ todo }) {
-  return <li>{todo.title}</li>;
+function TodoListItem({ todo, onRemoveTodo }) {
+  return (
+    <li>
+      {todo.title}
+      {/* Pass back to TodoListItem instance the callback w/argument upon click */}
+      <button type="button" onClick={() => onRemoveTodo(todo.id)}>
+        Remove
+      </button>
+    </li>
+  );
 }
 
 export default TodoListItem;
