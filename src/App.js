@@ -7,26 +7,28 @@ function App() {
   const [todoList, setTodoList] = useState([]);
   // 2)
   const [isLoading, setIsLoading] = useState(true);
-  // 3)
-  // Upon component initialization (loading/refreshing page) and after simulating a 2 second loading request:
-  // -result param receives item(s), array of objects, or nothing (b/c no item(s) stored in local storage yet)
-  // -todoList updates from an empty array to current state + is displayed as list item(s); and
-  // -isLoading state updates to false -> "Loading..." text is no longer rendered
+  // 3) Upon component initialization (loading/refreshing page):
   useEffect(() => {
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          data: {
-            // getItem *reads* an object from local storage
-            // JSON API transforms item(s) - JSON.parse() - from string to JavaScript object
-            todoList: JSON.parse(localStorage.getItem("savedTodoList")) || [],
-          },
-        });
-      }, 2000);
-    }).then((result) => {
-      setTodoList(result.data.todoList);
-      setIsLoading(false);
-    });
+    const request = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
+    const options = {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+      },
+    };
+    // -fetch asynchronous data from a real remote 3rd-party API via:
+    // a) the endpoint URL (request); and
+    // b) the token to authorize the request (options).
+    fetch(request, options)
+      // -pass a function to the then method that returns the response JSON data
+      .then((response) => response.json())
+      // -receive JSON data to then...
+      .then((result) => {
+        console.log("Result", result.records);
+        // -update todoList from an empty array to current state (references the new result format)
+        setTodoList(result.records);
+        // -update isLoading state to false -> "Loading..." text is no longer rendered
+        setIsLoading(false);
+      });
   }, []);
 
   // 6 & 9) After todoList state gets updated and isLoading is set to false, useEffect tracks when:
