@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AddTodoForm from "./AddTodoForm";
 import TodoList from "./TodoList";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   // 1) Set initial state to an empty array upon component initialization
@@ -69,25 +70,37 @@ function App() {
   };
 
   return (
-    // Insert fragment use when you don't want to introduce an element (div) to satisfy React rules
-    <>
-      <h1>Todo List</h1>
-      {/* 4) AddTodoForm instance:
-      -receives a passed object (current state of user input + unique no./id) after form is submitted
-      -> reference to the handler function addTodo is now invoked, passing object as an argument */}
-      <AddTodoForm onAddTodo={addTodo} />
-      {/* 7) After passing todoList (array of objects) in its updated CURRENT form to TodoList component...
-      -TodoList instance receives back:
-        -> what user has typed & submitted in a <li> format, now ready to be rendered into React.DOM 
-        -> todo.id, which a user wants removed (upon clicking the remove button); argument sent to handler */}
+    // Wrap existing JSX
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            // Insert fragment use when you don't want to introduce an element (div) to satisfy React rules
+            <>
+              <h1>Todo List</h1>
+              {/* 4) AddTodoForm instance:
+              -receives a passed object (current state of user input + unique no./id) after form is submitted
+              -> reference to the handler function addTodo is now invoked, passing object as an argument */}
+              <AddTodoForm onAddTodo={addTodo} />
+              {/* 7) After passing todoList (array of objects) in its updated CURRENT form to TodoList component...
+              -TodoList instance receives back:
+                -> what user has typed & submitted in a <li> format, now ready to be rendered into React.DOM 
+                -> todo.id, which a user wants removed (upon clicking the remove button); argument sent to handler */}
 
-      {/* If isLoading is true, display "Loading..." text below form, otherwise, render stored listed items */}
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
-      )}
-    </>
+              {/* If isLoading is true, display "Loading..." text below form, otherwise, render stored listed items */}
+              {isLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+              )}
+            </>
+          }
+        />
+        {/* Create a new Route w/path "/new" and a h1 w/text */}
+        <Route path="/new" element={<h1>New Todo List</h1>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
