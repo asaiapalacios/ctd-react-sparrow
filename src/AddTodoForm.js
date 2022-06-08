@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import InputWithLabel from "./InputWithLabel";
+import React, { useState } from 'react';
+import InputWithLabel from './InputWithLabel';
 
 function AddTodoForm({ onAddTodo }) {
   // A place to store what user types in input field: todoTitle state; initially empty
-  const [todoTitle, setTodoTitle] = useState("");
+  const [todoTitle, setTodoTitle] = useState('');
 
   // 2) todoTitle state gets updated (initally an empty string):
   // -> state will store current value user typed in input field
@@ -17,18 +17,24 @@ function AddTodoForm({ onAddTodo }) {
   // todoTitle state now updated to current state
   console.log(todoTitle);
 
-  // 5) Goal: pass object (current state of user input + unique no.) to <AddTodoForm />
+  // 5) Goal: pass object (of fields w/Title prop & value -> current state of user input) to <AddTodoForm />
   let handleAddTodo = (e) => {
     // Prevent the browser from executing the default behavior of the form submit
     // i.e., form won't be sent to another location & page won't be refreshed
     e.preventDefault();
     // Pass object to <AddTodoForm /> in App component (onAddTodo *IS* addTodo reference to handler func)
     onAddTodo({
-      title: todoTitle,
-      id: Date.now(),
+      fields: { Title: todoTitle },
     });
+
+    // Previous object setup
+    // onAddTodo({
+    //   title: todoTitle,
+    //   id: Date.now(),
+    // });
+
     // Reset todoTitle state to an empty string (to clear value) each time user submits form
-    setTodoTitle("");
+    setTodoTitle('');
   };
 
   return (
@@ -42,7 +48,7 @@ function AddTodoForm({ onAddTodo }) {
       >
         Title
       </InputWithLabel>
-      <button type="submit">Add</button>
+      <button type='submit'>Add</button>
     </form>
   );
 }

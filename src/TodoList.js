@@ -1,16 +1,16 @@
-import React from "react";
-import TodoListItem from "./TodoListItem";
+import React from 'react';
+import TodoListItem from './TodoListItem';
 
-// Return from each object of an array its input field value (title)) in <li>
+// Return from each item its input field value (Title) in <li>
 function TodoList({ todoList, onRemoveTodo }) {
   return (
     <ul>
-      {/* Note: todo is an object with key:value pairs of title and id */}
-      {/* For each item of passed array of objects to TodoListItem component...
-      instance receives back the input field value (title) in <li> form */}
+      {/* Note: todo is an object item with key:value pairs */}
+      {/* For each object item of passed array of objects to TodoListItem component...
+      instance receives back each todo item, the input field value (Title) in <li> form */}
       {todoList.map((todo) => {
         return (
-          // Pass back, to TodoList instance of App comp, the callback w/its arg (todo.id)
+          // Pass back to TodoList instance in App comp: item id, user input value + callback w/arg (todo.id)
           <TodoListItem key={todo.id} todo={todo} onRemoveTodo={onRemoveTodo} />
         );
       })}
