@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import AddTodoForm from "./AddTodoForm";
-import TodoList from "./TodoList";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import AddTodoForm from './AddTodoForm';
+import TodoList from './TodoList';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   // 1) Set initial state to an empty array upon component initialization
@@ -16,7 +16,7 @@ function App() {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
       },
     };
-    // -fetch asynchronous data from a real remote 3rd-party API via:
+    // -fetch/GET asynchronous data from a real remote 3rd-party API via:
     // a) the endpoint URL (request); and
     // b) the token to authorize the request (options).
     fetch(request, options)
@@ -24,11 +24,18 @@ function App() {
       .then((response) => response.json())
       // -receive JSON data to then...
       .then((result) => {
-        console.log("Result", result.records);
+        console.log('GET fetch request returns this object:', result);
+        console.log(
+          'Now access value of property records -> array of objects:',
+          result.records
+        );
         // -update todoList from an empty array to current state (references the new result format)
         setTodoList(result.records);
         // -update isLoading state to false -> "Loading..." text is no longer rendered
         setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log('Error (GET request):', error);
       });
   }, []);
 
@@ -39,34 +46,81 @@ function App() {
     if (!isLoading) {
       // *write*/save current state value in str format to browser local storage (sync state to storage)
       // note: JSON.stringify() transforms object into a string
-      localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+      localStorage.setItem('savedTodoList', JSON.stringify(todoList));
     }
   }, [todoList, isLoading]);
 
-  // 5) Update todoList
-  // callback's parameter newTodo receives passed current state object: user input + unique no.
+  // 5) Create new todoList via fetch API POST request
+  // callback's parameter newTodo receives current state todoTitle w/in obj -> {fields: { Title: todoTitle }}
   const addTodo = (newTodo) => {
-    console.log(newTodo);
+    const urlEndpt = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
+    const postOptions = {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      // Convert object into a string to send it over a network (Airtable expects obj formatted this way)
+      // note: property records stores array of object [newTodo] -> {fields: { Title: todoTitle }}
+      body: JSON.stringify({
+        records: [newTodo],
+      }),
+    };
 
-    // Pass newTodo object to the state setter function
-    // -> newTodo object (key:value pairs of title, id) appends to end of todoList array
-    // -> todoList updates from a copy of previous state to current state via setter funct setTodoList
-    setTodoList([...todoList, newTodo]);
-
-    // note: App component currently displays PREVIOUS state when console log
-    // console.log(todoList);
+    fetch(urlEndpt, postOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(
+          'POST request returns object storing Title -> what user input submitted for post:',
+          data
+        );
+        console.log(
+          'Now access value of records -> array of object:',
+          data.records
+        );
+        // Pass item user wants to post (what data.records stores, its array of obj) to the state setter funct
+        // -> ...data.records appends to end of todoList array
+        // -> todoList updates from a copy of previous state to current state via setter function setTodoList
+        setTodoList([...todoList, ...data.records]);
+        // note: App component currently displays PREVIOUS state when console.log inside code block
+        // console.log(todoList);
+      })
+      .catch((error) => {
+        console.log('Error (POST request):', error);
+      });
   };
   // now: App component re-renders to CURRENT state of array of objects when console log outside of addTodo
   console.log(todoList);
 
-  // 8) Remove clicked item with passed todo.id argument (now id parameter)
+  // 8) Remove clicked item via fetch API DELETE request passing todo.id argument (now as id parameter)
   const removeTodo = (id) => {
-    // For every item of the list, store new array of items to render if items meet truthy expression
-    // If expression is false (if item.id does === id), the item(s) are removed + not included in new array
-    const newList = todoList.filter((item) => item.id !== id);
-    // Render, after exiting callback handler, a new array minus items filter() removed (b/c expression false)
-    // Note: newList *IS* todoList
-    setTodoList(newList);
+    const urlEndpt = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default/${id}`;
+    const deleteOptions = {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+
+    fetch(urlEndpt, deleteOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(
+          'DELETE request returns object storing id specific to item user wishes to remove',
+          data
+        );
+        const idToRemove = data.id;
+        // For every item of the list, store new array of items to render if items meet truthy expression
+        // If expression is false (if item.id does === id), the item(s) are removed + not included in new array
+        const newList = todoList.filter((item) => item.id !== idToRemove);
+        // Render, after exiting callback handler, a new array w/out items filter() removed (b/c expression false)
+        // Note: newList *IS* todoList
+        setTodoList(newList);
+      })
+      .catch((error) => {
+        console.log('Error (DELETE request):', error);
+      });
   };
 
   return (
@@ -74,7 +128,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path='/'
           element={
             // Insert fragment use when you don't want to introduce an element (div) to satisfy React rules
             <>
@@ -98,7 +152,7 @@ function App() {
           }
         />
         {/* Create a new Route w/path "/new" and a h1 w/text */}
-        <Route path="/new" element={<h1>New Todo List</h1>} />
+        <Route path='/new' element={<h1>New Todo List</h1>} />
       </Routes>
     </BrowserRouter>
   );
