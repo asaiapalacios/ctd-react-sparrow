@@ -1,0 +1,25 @@
+.buttonAdd {
+  background: none;
+  color: #acde00;
+  /* color: #9893d8; */
+  /* color: #b8e4ff; */
+  /* color: #fefefe; */
+  font-weight: 700;
+  padding: 6px 12px;
+  /* margin: 0 10px; */
+  border-radius: 10px;
+}
+.listForm {
+  /* width 80% of the whole screen */
+  width: 80%;
+  /* if device > 400px, this is the max it'll ever be */
+  max-width: 400px;
+  /* cerntralize input field */
+  margin: 20px auto;
+  text-align: center;
+}
+/* .contact input,
+.contact textarea {
+  width: 100%;
+  margin: 10px 0;
+} */

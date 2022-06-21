@@ -1,4 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
+
+import style from './InputWithLabel.module.css';
 
 // Create a reusable component
 const InputWithLabel = ({ todoTitle, handleTitleChange, children }) => {
@@ -14,11 +16,13 @@ const InputWithLabel = ({ todoTitle, handleTitleChange, children }) => {
 
   return (
     <>
-      <label htmlFor="todoTitle">{children}</label>
+      <label htmlFor='todoTitle'>{children}</label>
       <input
-        type="text"
-        id="todoTitle"
-        name="title"
+        className={style.input}
+        type='text'
+        id='todoTitle'
+        name='title'
+        placeholder='OLDIE BUT A GOODIE'
         // 2) Receive user typed value in input field from updated state (prop todoTitle)
         // example of a controlled input:
         // i.e., our "one source of truth," as opposed to value coming from input element's native behavior

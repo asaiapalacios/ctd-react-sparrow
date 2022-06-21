@@ -1,0 +1,5 @@
+.input {
+  /* of 80% form width, input takes up 100% */
+  width: 100%;
+  margin-bottom: 10px;
+}

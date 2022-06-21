@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import InputWithLabel from './InputWithLabel';
 
+import style from './AddTodoForm.module.css';
+
 function AddTodoForm({ onAddTodo }) {
   // A place to store what user types in input field: todoTitle state; initially empty
   const [todoTitle, setTodoTitle] = useState('');
@@ -39,16 +41,16 @@ function AddTodoForm({ onAddTodo }) {
 
   return (
     // 4) When user SUBMITS a typed input, an (e) obj is passed to handler func reference handleAddTodo
-    <form onSubmit={handleAddTodo}>
+    <form className={style.listForm} onSubmit={handleAddTodo}>
       <InputWithLabel
         // 3) Send updated state, todoTitle, to value attribute of InputWithLabel component
         todoTitle={todoTitle}
         // 1) Receive back (e) obj from InputWithLabel component, now passed as an arg to event handler
         handleTitleChange={handleTitleChange}
-      >
-        Title
-      </InputWithLabel>
-      <button type='submit'>Add</button>
+      ></InputWithLabel>
+      <button className={style.buttonAdd} type='submit'>
+        + Add Song
+      </button>
     </form>
   );
 }
