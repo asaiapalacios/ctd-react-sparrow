@@ -1,0 +1,14 @@
+.listItem {
+  color: #ffffff;
+  /* color: #b8e4ff; */
+  /* color: #88ade0; */
+}
+.buttonRemove {
+  /* background: burlywood; */
+  background: none;
+  color: #ffe4c4;
+  margin: 5px 5px;
+  border-radius: 15px;
+  /* color: #dddbff; */
+  /* color: #9893d8; */
+}

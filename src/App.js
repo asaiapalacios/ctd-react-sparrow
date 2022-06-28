@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import AddTodoForm from './AddTodoForm';
 import TodoList from './TodoList';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+// import { HashLink as Link } from 'react-router-hash-link';
+
+import style from './App.module.css';
+import headphone from './headphone1.jpg';
+import cassette1 from './cassette1.jpg';
+import cassette3 from './cassette3.jpg';
+import { ReactComponent as Home } from './home.svg';
+import { ReactComponent as Mail } from './mail.svg';
+import { ReactComponent as GitHub } from './github.svg';
+import { ReactComponent as LinkedIn } from './linkedin.svg';
 
 function App() {
   // 1) Set initial state to an empty array upon component initialization
@@ -9,6 +19,9 @@ function App() {
   // 2)
   const [isLoading, setIsLoading] = useState(true);
   // 3) Upon component initialization (loading/refreshing page):
+
+  // const navigate = useNavigate();
+
   useEffect(() => {
     const request = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
     const options = {
@@ -132,27 +145,183 @@ function App() {
           element={
             // Insert fragment use when you don't want to introduce an element (div) to satisfy React rules
             <>
-              <h1>Todo List</h1>
-              {/* 4) AddTodoForm instance:
-              -receives a passed object (current state of user input + unique no./id) after form is submitted
-              -> reference to the handler function addTodo is now invoked, passing object as an argument */}
-              <AddTodoForm onAddTodo={addTodo} />
-              {/* 7) After passing todoList (array of objects) in its updated CURRENT form to TodoList component...
-              -TodoList instance receives back:
-                -> what user has typed & submitted in a <li> format, now ready to be rendered into React.DOM 
-                -> todo.id, which a user wants removed (upon clicking the remove button); argument sent to handler */}
+              <nav className={style.grid}>
+                <h1>Jam Away</h1>
+                <Link to='/jams'>
+                  <button className={style.button}>
+                    <Mail height='20px' width='20px' />
+                  </button>
+                </Link>
+              </nav>
+              <section className={`${style.grid} ${style.welcome}`}>
+                <div className={style.welcomeText}>
+                  <h2>
+                    Add music
+                    <br />
+                    to you Jam List
+                  </h2>
+                  <p className={style.leading}>
+                    Long lost forgotten songs? No more. Include them in your
+                    playlist with this jam list reminder!
+                  </p>
+                  <Link to='/jams'>
+                    <button className={style.buttonJam}>Let's Jam</button>
+                  </Link>
+                </div>
+                <div className={style.welcomeImg}>
+                  <img
+                    src={headphone}
+                    alt='A headphone lying next to colorful confetti by Ryan Quintal'
+                  />
+                </div>
+              </section>
+              <section className={style.jamList}>
+                <h2>Jam List</h2>
+                <p className={style.leading}>
+                  Enter your fave but forgotten song. Add and watch as your
+                  to-be playlist unfolds.
+                </p>
+                {/* <p className={style.leading}>
+                  Enter your fave but forgotten song. Add and watch as your
+                  updated list for your to-be playlist unfolds.
+                </p> */}
 
-              {/* If isLoading is true, display "Loading..." text below form, otherwise, render stored listed items */}
-              {isLoading ? (
-                <p>Loading...</p>
-              ) : (
-                <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
-              )}
+                {/* 4) AddTodoForm instance:
+                -receives a passed object (current state of user input + unique no./id) after form is submitted
+                -> reference to the handler function addTodo is now invoked, passing object as an argument */}
+                <AddTodoForm onAddTodo={addTodo} />
+                {/* 7) After passing todoList (array of objects) in its updated CURRENT form to TodoList component...
+                -TodoList instance receives back:
+                  -> what user has typed & submitted in a <li> format, now ready to be rendered into React.DOM 
+                  -> todo.id, which a user wants removed (upon clicking the remove button); argument sent to handler */}
+
+                {/* If isLoading is true, display "Loading..." text below form, otherwise, render stored listed items */}
+                {isLoading ? (
+                  <p>Loading...</p>
+                ) : (
+                  <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+                )}
+                <Link to='/jams'>
+                  <button className={style.buttonContact}>Get in Touch</button>
+                </Link>
+              </section>
+              <footer>
+                <div className={style.grid}>
+                  <p className={style.copyright}>
+                    Copyright 2022 Asaia Palacios
+                  </p>
+                  <ul className={style.social}>
+                    <li>
+                      <a
+                        href='https://github.com/asaiapalacios'
+                        target='_blank'
+                        rel='noreferrer noopener'
+                      >
+                        <GitHub className={style.linkSocial} />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href='https://www.linkedin.com/in/asaiapalacios/'
+                        target='_blank'
+                        rel='noreferrer noopener'
+                      >
+                        <LinkedIn className={style.linkSocial} />
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </footer>
             </>
           }
         />
         {/* Create a new Route w/path "/new" and a h1 w/text */}
-        <Route path='/new' element={<h1>New Todo List</h1>} />
+        <Route
+          path='/jams'
+          element={
+            <>
+              <nav className={style.grid}>
+                <h1>Jam Away</h1>
+                <Link to='/'>
+                  <button className={style.button}>
+                    <Home height='20px' width='20px' />
+                  </button>
+                </Link>
+              </nav>
+              <section className={style.skills}>
+                <h3>Created With</h3>
+                <ul className={style.grid}>
+                  <li>
+                    <img
+                      className={style.cassetteStyle1}
+                      src={cassette1}
+                      alt='a classic cassette'
+                    />
+                    <h4>JavaScript</h4>
+                  </li>
+                  <li>
+                    <img
+                      className={style.cassetteStyle2}
+                      src={cassette3}
+                      alt='a black cassette with a touch of neutral colors'
+                    />
+                    <h4>React</h4>
+                  </li>
+                </ul>
+              </section>
+              <section className={style.contact}>
+                <h3>Get in Touch</h3>
+                <p className={style.leading}>
+                  Sound off your thoughts on this app design. Gracias!
+                </p>
+                <form>
+                  <input
+                    className={style.contactBorder}
+                    type='text'
+                    placeholder='NAME'
+                  />
+                  <input
+                    className={style.contactBorder}
+                    type='email'
+                    placeholder='EMAIL'
+                  />
+                  <textarea
+                    className={style.contactBorder}
+                    placeholder='YOUR MESSAGE'
+                  ></textarea>
+                  <button className={style.buttonNeon}>Send Away</button>
+                </form>
+              </section>
+              <footer>
+                <div className={style.grid}>
+                  <p className={style.copyright}>
+                    Copyright 2022 Asaia Palacios
+                  </p>
+                  <ul className={style.social}>
+                    <li>
+                      <a
+                        href='https://github.com/asaiapalacios'
+                        target='_blank'
+                        rel='noreferrer noopener'
+                      >
+                        <GitHub className={style.linkSocial} />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href='https://www.linkedin.com/in/asaiapalacios/'
+                        target='_blank'
+                        rel='noreferrer noopener'
+                      >
+                        <LinkedIn className={style.linkSocial} />
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </footer>
+            </>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

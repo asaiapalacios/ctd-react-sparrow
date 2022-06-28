@@ -1,0 +1,304 @@
+/* global CSS styles */
+/* * {
+  padding: 0;
+  margin: 0;
+} */
+
+/* variables */
+:root {
+  --primary: #b8e4ff;
+  --secondary: #292d3e;
+}
+/* reset */
+body,
+p,
+a,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+li {
+  list-style-type: none;
+}
+/* base styles */
+body {
+  background: var(--secondary);
+  overflow-x: hidden;
+  font-family: 'Alata', sans-serif;
+}
+.button {
+  background: #88ade0;
+  border: 2px solid #88ade0;
+  /* border: 1px solid #222; */
+  /* border: 2px solid var(--primary); */
+  /* color: var(--primary); */
+  padding: 6px 12px;
+  border-radius: 20px;
+  /* text-transform: uppercase; */
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  /* helps w/styling & adding some margin to it */
+}
+/* .button:hover {
+  color: #222;
+  color: #ffffff;
+  background: #88ade0;
+  background: var(--primary);
+} */
+input,
+textarea {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: 1px solid #dddbff;
+  /* border: 2px solid #8581c0; */
+  /* border: 2px solid #9893d8; */
+  color: #f2f2f2;
+}
+h1,
+h2,
+h3 {
+  color: #dddbff;
+  font-weight: normal;
+}
+p {
+  /* color: #9893d8; */
+  color: #dddbff;
+  font-family: 'Roboto', sans-serif;
+}
+img {
+  border-radius: 50%;
+}
+h1,
+h3 {
+  font-size: 1.2em;
+}
+h2 {
+  font-size: 1.6em;
+}
+h4 {
+  color: #88ade0;
+  font-size: 1.1em;
+}
+/* css module */
+.leading {
+  font-size: 1.1em;
+  /* color: #dddbff; */
+}
+.buttonJam {
+  color: var(--primary);
+  background: none;
+  /* background: var(--primary); */
+  border: 2px solid var(--primary);
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  /* helps w/styling & adding some margin to it */
+}
+.buttonNeon {
+  color: #222;
+  background: #acde00;
+  /* background: none; */
+  border: 2px solid var(--primary);
+  /* color: #acde00; */
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  /* helps w/styling & adding some margin to it */
+  margin-top: 5px;
+}
+.buttonContact {
+  background: none;
+  border: none;
+  /* color: #dddbff; */
+  color: #ffffff;
+  padding: 6px 12px;
+  /* padding: 8px 10px 6px 10px; */
+  margin: 40px 0 0 0;
+  border-bottom: 2px solid #acde00;
+  border-radius: 3px;
+  text-transform: uppercase;
+  /* box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6); */
+  display: inline-block;
+  /* helps w/styling & adding some margin to it */
+}
+/* .buttonNeon:hover {
+  color: #222;
+  background: #acde00;
+} */
+/* .contactBorder {
+  border: 2px solid #dddbff;
+} */
+
+/* fonts */
+
+/* mobile styles */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+}
+.grid h1 {
+  grid-column: 1/4;
+  grid-row: 1;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #acde00;
+}
+nav {
+  margin: 0 20px;
+}
+.welcome {
+  padding: 0 20px 20px 20px;
+}
+.welcomeText {
+  grid-column: 1/6;
+}
+.welcomeImg {
+  grid-column: 6/9;
+}
+.welcomeImg img {
+  width: 100%;
+  outline: 2px solid #8581c0;
+  /* outline: 2px solid #88ade0; */
+  outline-offset: 2px;
+}
+.welcomeText button {
+  margin: 20px 0;
+}
+.jamList {
+  background: #2e3347;
+  padding: 30px 20px;
+  text-align: center;
+
+  /* background: #30364d; */
+  /* background: #272c3f; */
+  /* background: #333951; */
+
+  /* background-size: cover; */
+  /* background-repeat: no-repeat;
+  background-position: bottom; */
+}
+.jamList h2,
+.jamList p {
+  text-align: center;
+  margin-bottom: 0;
+}
+.skills {
+  padding: 30px 20px;
+  /* background: #333951; */
+  background: #30364d;
+}
+.skills h3 {
+  text-align: center;
+}
+.skills ul {
+  margin: 40px 0;
+}
+.skills li {
+  padding: 10px;
+  /* background: rgba(0, 0, 0, 0.2); */
+  /* each item takes up 4 columns in width */
+  grid-column: span 4;
+  text-align: center;
+}
+/* .skills img {
+  height: 180px;
+  border-radius: 50%;
+  margin: 10px auto;
+} */
+.cassetteStyle1 {
+  height: 185px;
+  /* width: 220px; */
+  outline: 2px solid #000000;
+  outline-offset: -10px;
+  margin: 10px auto;
+}
+.cassetteStyle2 {
+  height: 155px;
+  /* width: 188px; */
+  border: 2px solid #acde00;
+  padding: 10px;
+  margin: 12px auto;
+}
+.contact {
+  padding: 30px 20px;
+  /* background: #080936; */
+}
+.contact h3,
+.contact p {
+  text-align: center;
+  margin-bottom: 0;
+}
+.contact form {
+  /* width 80% of the whole screen */
+  width: 80%;
+  /* if device > 400px, this is the max it'll ever be */
+  max-width: 400px;
+  /* cerntralize input fields and text area */
+  margin: 20px auto;
+  text-align: center;
+}
+.contact input,
+.contact textarea {
+  width: 100%;
+  margin: 10px 0;
+}
+footer {
+  padding: 30px 20px;
+  background-color: #1b1b41;
+  /* #14153d */
+}
+footer .copyright {
+  grid-column: 1/3;
+  font-size: 0.8em;
+}
+footer .social {
+  grid-column: 7/9;
+  color: #dddbff;
+  /* color: white; */
+  display: flex;
+  justify-content: flex-end;
+}
+footer li {
+  margin: 0 6px;
+}
+/* for svg? */
+/* footer img {
+  width: 20px;
+} */
+.linkSocial {
+  background: #c1c0db;
+  /* background: #88ade0; */
+  /* border: 2px solid #88ade0; */
+  border: 2px solid #acde00;
+  /* border: 2px solid var(--primary); */
+  /* color: var(--primary); */
+  padding: 6px 12px;
+  border-radius: 20px;
+  /* box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6); */
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  /* helps w/styling & adding some margin to it */
+}
+/* small tablet styles */
+@media screen and (min-width: 620px) {
+}
+/* large tablet & laptop styles */
+@media screen and (min-width: 960px) {
+  body {
+    font-size: 18px;
+  }
+}
+/* desktop styles */
+@media screen and (min-width: 1200px) {
+  body {
+    font-size: 20px;
+  }
+}
