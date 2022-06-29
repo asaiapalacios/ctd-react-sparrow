@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import AddTodoForm from './AddTodoForm';
-import TodoList from './TodoList';
+import AddTodoForm from './components/AddTodoForm';
+import TodoList from './components/TodoList';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 // import { HashLink as Link } from 'react-router-hash-link';
 

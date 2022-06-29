@@ -1,8 +1,10 @@
 import React from 'react';
 import style from './TodoListItem.module.css';
+// import PropTypes from '.prop-types';
 
 // Return Title/input field value (what user typed and submitted) in <li>
 function TodoListItem({ todo, onRemoveTodo }) {
+  // console.log(todo);
   return (
     <li className={style.listItem}>
       {/* Pinpoint how to access specifically the Title value (what user wishes to post in list item format after submitting typed input) */}
@@ -18,5 +20,9 @@ function TodoListItem({ todo, onRemoveTodo }) {
     </li>
   );
 }
+
+// TodoListItem.prototypes = {
+//   todo: PropTypes.object,
+// };
 
 export default TodoListItem;
