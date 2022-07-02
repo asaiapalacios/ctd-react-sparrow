@@ -28,19 +28,14 @@ body {
   overflow-x: hidden;
   font-family: 'Alata', sans-serif;
 }
-.button {
-  background: #88ade0;
-  border: 2px solid #88ade0;
-  /* border: 1px solid #222; */
-  /* border: 2px solid var(--primary); */
-  /* color: var(--primary); */
-  padding: 6px 12px;
-  border-radius: 20px;
-  /* text-transform: uppercase; */
-  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
-  display: inline-block;
-  /* helps w/styling & adding some margin to it */
+.siteNav a {
+  display: flex;
+  grid-column: 8/9;
+  justify-content: flex-end;
+  align-self: center;
 }
+/* GO OVER */
+
 /* .button:hover {
   color: #222;
   color: #ffffff;
@@ -63,6 +58,9 @@ h3 {
   color: #dddbff;
   font-weight: normal;
 }
+/* h2 {
+  color: #8581c0;
+} */
 p {
   /* color: #9893d8; */
   color: #dddbff;
@@ -77,6 +75,7 @@ h3 {
 }
 h2 {
   font-size: 1.6em;
+  line-height: 25px;
 }
 h4 {
   color: #88ade0;
@@ -84,8 +83,17 @@ h4 {
 }
 /* css module */
 .leading {
-  font-size: 1.1em;
+  font-size: 1em;
+  margin-top: 5px;
   /* color: #dddbff; */
+}
+.button {
+  background: #88ade0;
+  border: 2px solid #8581c0;
+  border-radius: 20px;
+  /* before: w40px h40px */
+  width: 35px;
+  height: 35px;
 }
 .buttonJam {
   color: var(--primary);
@@ -98,6 +106,25 @@ h4 {
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
   display: inline-block;
   /* helps w/styling & adding some margin to it */
+  font-size: 11px;
+}
+.buttonContact {
+  /* color: #acde00;
+  background: none;
+  border: 1px solid #acde00; */
+  
+  color: #222;
+  background: #acde00;
+  border: 2px solid var(--primary);
+
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  /* helps w/styling & adding some margin to it */
+  margin-top: 115px;
+  font-size: 11px;
 }
 .buttonNeon {
   color: #222;
@@ -112,28 +139,21 @@ h4 {
   display: inline-block;
   /* helps w/styling & adding some margin to it */
   margin-top: 5px;
+  font-size: 11px;
 }
-.buttonContact {
-  background: none;
-  border: none;
-  /* color: #dddbff; */
+/* most likely REMOVE! */
+/* .inTouch {
+  ist color choice
+  color: #dddbff;
   color: #ffffff;
-  padding: 6px 12px;
-  /* padding: 8px 10px 6px 10px; */
-  margin: 40px 0 0 0;
-  border-bottom: 2px solid #acde00;
-  border-radius: 3px;
-  text-transform: uppercase;
-  /* box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6); */
+
+  helps w/styling & adding some margin to it
   display: inline-block;
-  /* helps w/styling & adding some margin to it */
-}
-/* .buttonNeon:hover {
-  color: #222;
-  background: #acde00;
-} */
-/* .contactBorder {
-  border: 2px solid #dddbff;
+
+  100% of the whole screen
+  width: 100%;
+  text-align: center;
+  margin-top: 220px;
 } */
 
 /* fonts */
@@ -145,7 +165,7 @@ h4 {
   gap: 10px;
 }
 .grid h1 {
-  grid-column: 1/4;
+  grid-column: 1/3;
   grid-row: 1;
   padding-bottom: 10px;
   border-bottom: 3px solid #acde00;
@@ -157,13 +177,13 @@ nav {
   padding: 0 20px 20px 20px;
 }
 .welcomeText {
-  grid-column: 1/6;
+  grid-column: 1/5;
 }
 .welcomeImg {
   grid-column: 6/9;
 }
 .welcomeImg img {
-  width: 100%;
+  width: 108%;
   outline: 2px solid #8581c0;
   /* outline: 2px solid #88ade0; */
   outline-offset: 2px;
@@ -188,6 +208,16 @@ nav {
 .jamList p {
   text-align: center;
   margin-bottom: 0;
+}
+.spaceSection {
+  height: 250px;
+  /* width 80% of the whole screen */
+  width: 80%;
+  /* if device > 400px, this is the max it'll ever be */
+  max-width: 400px;
+  /* cerntralize input field */
+  margin: 10px auto;
+  text-align: center;
 }
 .skills {
   padding: 30px 20px;
@@ -214,14 +244,14 @@ nav {
 } */
 .cassetteStyle1 {
   height: 185px;
-  /* width: 220px; */
+  width: 220px;
   outline: 2px solid #000000;
   outline-offset: -10px;
   margin: 10px auto;
 }
 .cassetteStyle2 {
   height: 155px;
-  /* width: 188px; */
+  width: 188px;
   border: 2px solid #acde00;
   padding: 10px;
   margin: 12px auto;
@@ -238,9 +268,9 @@ nav {
 .contact form {
   /* width 80% of the whole screen */
   width: 80%;
-  /* if device > 400px, this is the max it'll ever be */
+  /* if device is greater than 400px, this is the max itll ever be */
   max-width: 400px;
-  /* cerntralize input fields and text area */
+  /* center input fields and text area */
   margin: 20px auto;
   text-align: center;
 }
@@ -252,6 +282,9 @@ nav {
 footer {
   padding: 30px 20px;
   background-color: #1b1b41;
+  border-top: 1px solid #8581c0;
+  /* border-top: 1px solid #b8da4a; */
+  /* border-top: 1px solid #ffe4c4; */
   /* #14153d */
 }
 footer .copyright {
@@ -273,32 +306,114 @@ footer li {
   width: 20px;
 } */
 .linkSocial {
-  background: #c1c0db;
+  background: #ffffff;
+  /* background: #c1c0db; */
+  /* border: 2px solid #acde00; */
+
   /* background: #88ade0; */
   /* border: 2px solid #88ade0; */
-  border: 2px solid #acde00;
   /* border: 2px solid var(--primary); */
   /* color: var(--primary); */
   padding: 6px 12px;
   border-radius: 20px;
   /* box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6); */
-  display: inline-block;
-  height: 15px;
-  width: 15px;
   /* helps w/styling & adding some margin to it */
+  display: inline-block;
+  height: 12px;
+  width: 12px;
 }
 /* small tablet styles */
 @media screen and (min-width: 620px) {
+  .welcomeImg img {
+    width: 98%;
+  }
+  .skills {
+    padding: 30px 75px;
+  }
+  .button {
+    width: 40px;
+    height: 40px;
+  }
+  .buttonJam, .buttonContact, .buttonNeon {
+    font-size: 13.3333px;
+  }
+  /* footer {
+    background-size: 20%;
+  } */
+  /* footer .copyright {
+    font-size: 0.9em;
+  } */
 }
 /* large tablet & laptop styles */
 @media screen and (min-width: 960px) {
   body {
     font-size: 18px;
   }
+  .grid {
+    width: 100%;
+    max-width: 1060px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .siteNav {
+    padding: 0 20px;
+  }
+  .leading {
+    margin: 20px 0;
+  }
+  .welcomeText {
+    align-self: center;
+  }
+  .welcome {
+    padding-bottom: 40px;
+  }
+  /* FIGURE out which padding you want */
+  .skills {
+    padding: 30px 200px;
+    /* padding: 30px 75px; */
+  }
+  .skills ul {
+    margin: 40px auto;
+  }
+  /* Note: already have this setting in mobile styles */
+  /* .skills li {
+    grid-column: span 4;
+  } */
+  .button {
+    width: 40px;
+    height: 40px;
+  }
+  .buttonJam, .buttonContact, .buttonNeon {
+    font-size: 13.3333px;
+  }
+  footer {
+    padding: 40px 20px;
+    /* background-size: 25%; */
+  }
 }
 /* desktop styles */
 @media screen and (min-width: 1200px) {
   body {
     font-size: 20px;
+  }
+  .welcome, .jamList, .spaceSection, .skills, .contact {
+    padding: 90px 0;
+  }
+  .skills li * {
+    max-width: 100%;
+    margin: 30px 0;
+  }
+  .button {
+    width: 40px;
+    height: 40px;
+  }
+  .buttonJam, .buttonContact, .buttonNeon {
+    font-size: 13.3333px;
+  }
+  footer {
+    padding: 60px 0;
+  }
+  .linkSocial {
+    width: 30px;
   }
 }
