@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import AddTodoForm from './AddTodoForm';
-import TodoList from './TodoList';
+import AddTodoForm from './components/AddTodoForm';
+import TodoList from './components/TodoList';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 // import { HashLink as Link } from 'react-router-hash-link';
 
@@ -145,20 +145,20 @@ function App() {
           element={
             // Insert fragment use when you don't want to introduce an element (div) to satisfy React rules
             <>
-              <nav className={style.grid}>
+              <nav className={`${style.grid} ${style.siteNav}`}>
                 <h1>Jam Away</h1>
                 <Link to='/jams'>
                   <button className={style.button}>
-                    <Mail height='20px' width='20px' />
+                    <Mail />
                   </button>
                 </Link>
               </nav>
               <section className={`${style.grid} ${style.welcome}`}>
                 <div className={style.welcomeText}>
                   <h2>
-                    Add music
+                    Add Music
                     <br />
-                    to you Jam List
+                    to your Jam List
                   </h2>
                   <p className={style.leading}>
                     Long lost forgotten songs? No more. Include them in your
@@ -178,7 +178,7 @@ function App() {
               <section className={style.jamList}>
                 <h2>Jam List</h2>
                 <p className={style.leading}>
-                  Enter your fave but forgotten song. Add and watch as your
+                  Enter your fave song. Watch as your
                   to-be playlist unfolds.
                 </p>
                 {/* <p className={style.leading}>
@@ -201,9 +201,18 @@ function App() {
                 ) : (
                   <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
                 )}
+                {/* <Link to='/jams'>
+                  <button className={style.buttonContact}>Get in Touch</button>
+                </Link> */}
+              </section>
+              <section className={style.spaceSection}>
                 <Link to='/jams'>
                   <button className={style.buttonContact}>Get in Touch</button>
                 </Link>
+          
+                {/* <a href='/jams'className={style.inTouch}>
+                    Get in Touch
+                </a> */}
               </section>
               <footer>
                 <div className={style.grid}>
@@ -240,11 +249,11 @@ function App() {
           path='/jams'
           element={
             <>
-              <nav className={style.grid}>
+              <nav className={`${style.grid} ${style.siteNav}`}>
                 <h1>Jam Away</h1>
                 <Link to='/'>
                   <button className={style.button}>
-                    <Home height='20px' width='20px' />
+                    <Home />
                   </button>
                 </Link>
               </nav>
@@ -272,7 +281,7 @@ function App() {
               <section className={style.contact}>
                 <h3>Get in Touch</h3>
                 <p className={style.leading}>
-                  Sound off your thoughts on this app design. Gracias!
+                  Sound off. Share your thoughts on this app design. Gracias!
                 </p>
                 <form>
                   <input
