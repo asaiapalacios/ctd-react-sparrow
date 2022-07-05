@@ -23,7 +23,7 @@ function App() {
   // const navigate = useNavigate();
 
   useEffect(() => {
-    const request = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
+    const request = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default?view=Grid%20view&sort[0][field]=Title&sort[0][direction]=asc`;
     const options = {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
@@ -42,6 +42,28 @@ function App() {
           'Now access value of property records -> array of objects:',
           result.records
         );
+        // -sort list in ascending order by Title
+        console.log("Sort title in ascending order, A-Z:");
+        result.records.sort((objectA, objectB) => {
+          if (objectA.fields.Title < objectB.fields.Title) return -1;
+          if (objectA.fields.Title === objectB.fields.Title) return 0;          
+          if (objectA.fields.Title > objectB.fields.Title) return 1;
+        });
+
+        // (short version):
+        // result.records.sort((objectA, objectB) => objectA.fields.Title - objectB.fields.Title);
+
+        // -OR sort list in descending order by Title
+        // console.log("Sort title in descending order, Z-A:");
+        // result.records.sort((objectA, objectB) => {
+        //   if (objectB.fields.Title < objectA.fields.Title) return -1;
+        //   if (objectB.fields.Title === objectA.fields.Title) return 0;          
+        //   if (objectB.fields.Title > objectA.fields.Title) return 1;
+        // });
+
+        // (short version)
+        // result.records.sort((objectA, objectB) => { return objectB.fields.Title - objectA.fields.Title });
+
         // -update todoList from an empty array to current state (references the new result format)
         setTodoList(result.records);
         // -update isLoading state to false -> "Loading..." text is no longer rendered
