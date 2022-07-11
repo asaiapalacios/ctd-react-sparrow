@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AddTodoForm from './components/AddTodoForm';
 import TodoList from './components/TodoList';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-// import { HashLink as Link } from 'react-router-hash-link';
+import { HashLink } from 'react-router-hash-link';
 
 import style from './App.module.css';
 import headphone from './headphone1.jpg';
@@ -10,7 +10,7 @@ import cassette1 from './cassette1.jpg';
 import cassette3 from './cassette3.jpg';
 import { ReactComponent as Home } from './home.svg';
 import { ReactComponent as Mail } from './mail.svg';
-import { ReactComponent as GitHub } from './github.svg';
+import { FiGithub } from 'react-icons/fi'
 import { ReactComponent as LinkedIn } from './linkedin.svg';
 
 function App() {
@@ -19,6 +19,8 @@ function App() {
   // 2)
   const [isLoading, setIsLoading] = useState(true);
   // 3) Upon component initialization (loading/refreshing page):
+
+  
 
   // const navigate = useNavigate();
 
@@ -36,36 +38,39 @@ function App() {
       // -pass a function to the then method that returns the response JSON data
       .then((response) => response.json())
       // -receive JSON data to then...
-      .then((result) => {
-        console.log('GET fetch request returns this object:', result);
+      .then((data) => {
+        console.log('GET fetch request returns this object:', data);
         console.log(
           'Now access value of property records -> array of objects:',
-          result.records
+          data.records
         );
+        
         // -sort list in ascending order by Title
         console.log("Sort title in ascending order, A-Z:");
-        result.records.sort((objectA, objectB) => {
-          if (objectA.fields.Title < objectB.fields.Title) return -1;
-          if (objectA.fields.Title === objectB.fields.Title) return 0;          
-          if (objectA.fields.Title > objectB.fields.Title) return 1;
-        });
+        // data.records.sort((objectA, objectB) => {
+        //   if (objectA.fields.Title < objectB.fields.Title) return -1;
+        //   if (objectA.fields.Title === objectB.fields.Title) return 0;          
+        //   if (objectA.fields.Title > objectB.fields.Title) return 1;
+        // });
 
         // (short version):
-        // result.records.sort((objectA, objectB) => objectA.fields.Title - objectB.fields.Title);
-
+        const sortData = data.records.sort((objectA, objectB) => objectA.fields.Title - objectB.fields.Title);
+        console.log('Data sorted by Title:', sortData);
         // -OR sort list in descending order by Title
         // console.log("Sort title in descending order, Z-A:");
-        // result.records.sort((objectA, objectB) => {
+        // data.records.sort((objectA, objectB) => {
         //   if (objectB.fields.Title < objectA.fields.Title) return -1;
         //   if (objectB.fields.Title === objectA.fields.Title) return 0;          
         //   if (objectB.fields.Title > objectA.fields.Title) return 1;
         // });
 
         // (short version)
-        // result.records.sort((objectA, objectB) => { return objectB.fields.Title - objectA.fields.Title });
+        // data.records.sort((objectA, objectB) => return objectB.fields.Title - objectA.fields.Title);
 
-        // -update todoList from an empty array to current state (references the new result format)
-        setTodoList(result.records);
+        // -update todoList from an empty array to current state (references the fetched JSON data)
+        setTodoList(sortData);
+        // setTodoList(data.records);
+
         // -update isLoading state to false -> "Loading..." text is no longer rendered
         setIsLoading(false);
       })
@@ -158,6 +163,15 @@ function App() {
       });
   };
 
+  // let handleSort = (e) => {
+  //   console.log('When click Asc/Desc, sort Title in descending order (Z-A):');
+  //   data.records.sort((objectA, objectB) => {
+  //     if (objectB.fields.Title < objectA.fields.Title) return -1;
+  //     if (objectB.fields.Title === objectA.fields.Title) return 0;          
+  //     if (objectB.fields.Title > objectA.fields.Title) return 1;
+  //   });
+  // }
+
   return (
     // Wrap existing JSX
     <BrowserRouter>
@@ -171,7 +185,7 @@ function App() {
                 <h1>Jam Away</h1>
                 <Link to='/jams'>
                   <button className={style.button}>
-                    <Mail />
+                    <Mail title='Contact Me' />
                   </button>
                 </Link>
               </nav>
@@ -186,9 +200,9 @@ function App() {
                     Long lost forgotten songs? No more. Include them in your
                     playlist with this jam list reminder!
                   </p>
-                  <Link to='/jams'>
+                  <HashLink to='#jamList' smooth>
                     <button className={style.buttonJam}>Let's Jam</button>
-                  </Link>
+                  </HashLink>
                 </div>
                 <div className={style.welcomeImg}>
                   <img
@@ -197,7 +211,7 @@ function App() {
                   />
                 </div>
               </section>
-              <section className={style.jamList}>
+              <section className={style.jamList} id='jamList'>
                 <h2>Jam List</h2>
                 <p className={style.leading}>
                   Enter your fave song. Watch as your
@@ -212,6 +226,9 @@ function App() {
                 -receives a passed object (current state of user input + unique no./id) after form is submitted
                 -> reference to the handler function addTodo is now invoked, passing object as an argument */}
                 <AddTodoForm onAddTodo={addTodo} />
+                {/* <button type='button' onClick={handleSort}>
+                  Asc/Desc
+                </button> */}
                 {/* 7) After passing todoList (array of objects) in its updated CURRENT form to TodoList component...
                 -TodoList instance receives back:
                   -> what user has typed & submitted in a <li> format, now ready to be rendered into React.DOM 
@@ -219,7 +236,7 @@ function App() {
 
                 {/* If isLoading is true, display "Loading..." text below form, otherwise, render stored listed items */}
                 {isLoading ? (
-                  <p>Loading...</p>
+                  <p>Loading...One sec.</p>
                 ) : (
                   <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
                 )}
@@ -244,11 +261,11 @@ function App() {
                   <ul className={style.social}>
                     <li>
                       <a
-                        href='https://github.com/asaiapalacios'
+                        href='https://github.com/asaiapalacios/ctd-react-sparrow'
                         target='_blank'
                         rel='noreferrer noopener'
                       >
-                        <GitHub className={style.linkSocial} />
+                        <FiGithub className={style.linkSocial} title='GitHub' />
                       </a>
                     </li>
                     <li>
@@ -257,7 +274,7 @@ function App() {
                         target='_blank'
                         rel='noreferrer noopener'
                       >
-                        <LinkedIn className={style.linkSocial} />
+                        <LinkedIn className={style.linkSocial} title='LinkedIn' />
                       </a>
                     </li>
                   </ul>
@@ -275,7 +292,7 @@ function App() {
                 <h1>Jam Away</h1>
                 <Link to='/'>
                   <button className={style.button}>
-                    <Home />
+                    <Home title='Home' />
                   </button>
                 </Link>
               </nav>
@@ -331,11 +348,11 @@ function App() {
                   <ul className={style.social}>
                     <li>
                       <a
-                        href='https://github.com/asaiapalacios'
+                        href='https://github.com/asaiapalacios/ctd-react-sparrow'
                         target='_blank'
                         rel='noreferrer noopener'
                       >
-                        <GitHub className={style.linkSocial} />
+                        <FiGithub className={style.linkSocial} title='GitHub' />
                       </a>
                     </li>
                     <li>
@@ -344,7 +361,7 @@ function App() {
                         target='_blank'
                         rel='noreferrer noopener'
                       >
-                        <LinkedIn className={style.linkSocial} />
+                        <LinkedIn className={style.linkSocial} title='LinkedIn' />
                       </a>
                     </li>
                   </ul>
