@@ -4,12 +4,13 @@
   /* color: #88ade0; */
 }
 .buttonRemove {
-  /* background: burlywood; */
   background: none;
-  color: #8581c0;
+  color: #acde00;
+  /* color: #8581c0; */
   /* color: #ffe4c4; */
   margin: 2px 7px;
   border-radius: 15px;
+  cursor: pointer;
   /* color: #dddbff; */
   /* color: #9893d8; */
 }

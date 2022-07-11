@@ -1,0 +1,9 @@
+.buttonAscDesc {
+    background: none;
+    color: #acde00;
+    font-weight: 700;
+    padding: 6px 12px;
+    margin-top: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+  }

@@ -34,14 +34,6 @@ body {
   justify-content: flex-end;
   align-self: center;
 }
-/* GO OVER */
-
-/* .button:hover {
-  color: #222;
-  color: #ffffff;
-  background: #88ade0;
-  background: var(--primary);
-} */
 input,
 textarea {
   background: rgba(255, 255, 255, 0.05);
@@ -95,6 +87,9 @@ h4 {
   width: 35px;
   height: 35px;
 }
+.button, .buttonJam, .buttonContact, .buttonNeon {
+  cursor: pointer;
+}
 .buttonJam {
   color: var(--primary);
   background: none;
@@ -108,13 +103,19 @@ h4 {
   /* helps w/styling & adding some margin to it */
   font-size: 11px;
 }
+.buttonJam:hover {
+  color: #222;
+  background: #88ade0;
+  background: var(--primary);
+}
 .buttonContact {
   /* color: #acde00;
   background: none;
   border: 1px solid #acde00; */
-  
+
   color: #222;
-  background: #acde00;
+  background: #88ade0;
+  /* background: #acde00; */
   border: 2px solid var(--primary);
 
   padding: 6px 12px;
@@ -128,7 +129,8 @@ h4 {
 }
 .buttonNeon {
   color: #222;
-  background: #acde00;
+  background: #88ade0;
+  /* background: #acde00; */
   /* background: none; */
   border: 2px solid var(--primary);
   /* color: #acde00; */
@@ -307,6 +309,7 @@ footer li {
 } */
 .linkSocial {
   background: #ffffff;
+  outline: 2px solid #8581c0;
   /* background: #c1c0db; */
   /* border: 2px solid #acde00; */
 
@@ -395,6 +398,9 @@ footer li {
 @media screen and (min-width: 1200px) {
   body {
     font-size: 20px;
+  }
+  .siteNav {
+    padding: 0 0;
   }
   .welcome, .jamList, .spaceSection, .skills, .contact {
     padding: 90px 0;
