@@ -3,15 +3,16 @@ import AddTodoForm from './components/AddTodoForm';
 import TodoList from './components/TodoList';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import PropTypes from 'prop-types';
 
 import style from './App.module.css';
 import headphone from './headphone1.jpg';
 import cassette1 from './cassette1.jpg';
 import cassette3 from './cassette3.jpg';
 import { ReactComponent as Home } from './home.svg';
+import { ReactComponent as LinkedIn } from './linkedin.svg';
 import { ReactComponent as Mail } from './mail.svg';
 import { FiGithub } from 'react-icons/fi'
-import { ReactComponent as LinkedIn } from './linkedin.svg';
 
 function App() {
   // 1) Set initial state to an empty array upon component initialization
@@ -20,7 +21,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   // 3) Upon component initialization (loading/refreshing page):
 
-  
+  const [isAscending, setIsAscending] = useState(true);
 
   // const navigate = useNavigate();
 
@@ -46,7 +47,8 @@ function App() {
         );
         
         // -sort list in ascending order by Title
-        console.log("Sort title in ascending order, A-Z:");
+        // console.log("Sort title in ascending order, A-Z:");
+
         // data.records.sort((objectA, objectB) => {
         //   if (objectA.fields.Title < objectB.fields.Title) return -1;
         //   if (objectA.fields.Title === objectB.fields.Title) return 0;          
@@ -54,8 +56,9 @@ function App() {
         // });
 
         // (short version):
-        const sortData = data.records.sort((objectA, objectB) => objectA.fields.Title - objectB.fields.Title);
-        console.log('Data sorted by Title:', sortData);
+        // const sortData = data.records.sort((objectA, objectB) => objectA.fields.Title - objectB.fields.Title);
+        // console.log('Data sorted by Title:', sortData);
+
         // -OR sort list in descending order by Title
         // console.log("Sort title in descending order, Z-A:");
         // data.records.sort((objectA, objectB) => {
@@ -68,10 +71,10 @@ function App() {
         // data.records.sort((objectA, objectB) => return objectB.fields.Title - objectA.fields.Title);
 
         // -update todoList from an empty array to current state (references the fetched JSON data)
-        setTodoList(sortData);
-        // setTodoList(data.records);
+        // setTodoList(sortData);
+        setTodoList(data.records);
 
-        // -update isLoading state to false -> "Loading..." text is no longer rendered
+        // -update isLoading state to false -> "Loading...One sec" text is no longer rendered
         setIsLoading(false);
       })
       .catch((error) => {
@@ -89,6 +92,36 @@ function App() {
       localStorage.setItem('savedTodoList', JSON.stringify(todoList));
     }
   }, [todoList, isLoading]);
+
+  function sortTitle(objectA, objectB) {
+    // Sort in descending order after you click on sort button (default order is ascending when loading)
+    if(isAscending) {
+      setIsAscending(!isAscending);
+      if(objectA.fields.Title.toLowerCase() < objectB.fields.Title.toLowerCase()) {
+        return 1;
+      }
+      if (objectA.fields.Title.toLowerCase() > objectB.fields.Title.toLowerCase()) {
+        return -1;
+      }
+      return 0;
+    }
+    // Sort in ascending order
+    if(!isAscending) {
+      setIsAscending(!isAscending);
+      if(objectA.fields.Title.toLowerCase() < objectB.fields.Title.toLowerCase()) {
+        return -1;
+      }
+      if (objectA.fields.Title.toLowerCase() > objectB.fields.Title.toLowerCase()) {
+        return 1;
+      }
+      return 0;
+    }
+  }
+
+  const handleSort = (sortFunc) => {
+    let sortList = todoList.sort(sortFunc);
+    setTodoList(sortList);
+  };
 
   // 5) Create new todoList via fetch API POST request
   // callback's parameter newTodo receives current state todoTitle w/in obj -> {fields: { Title: todoTitle }}
@@ -163,15 +196,6 @@ function App() {
       });
   };
 
-  // let handleSort = (e) => {
-  //   console.log('When click Asc/Desc, sort Title in descending order (Z-A):');
-  //   data.records.sort((objectA, objectB) => {
-  //     if (objectB.fields.Title < objectA.fields.Title) return -1;
-  //     if (objectB.fields.Title === objectA.fields.Title) return 0;          
-  //     if (objectB.fields.Title > objectA.fields.Title) return 1;
-  //   });
-  // }
-
   return (
     // Wrap existing JSX
     <BrowserRouter>
@@ -236,9 +260,9 @@ function App() {
 
                 {/* If isLoading is true, display "Loading..." text below form, otherwise, render stored listed items */}
                 {isLoading ? (
-                  <p>Loading...One sec.</p>
+                  <p>Loading...One sec</p>
                 ) : (
-                  <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+                  <TodoList todoList={todoList} onRemoveTodo={removeTodo} sortTitle={sortTitle} handleSort={handleSort} />
                 )}
                 {/* <Link to='/jams'>
                   <button className={style.buttonContact}>Get in Touch</button>
@@ -376,3 +400,8 @@ function App() {
 }
 
 export default App;
+
+App.protoTypes = {
+  sortTitle: PropTypes.func,
+  handleSort: PropTypes.func,
+}
