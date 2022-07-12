@@ -49,9 +49,15 @@ function AddTodoForm({ onAddTodo }) {
         // 1) Receive back (e) obj from InputWithLabel component, now passed as an arg to event handler
         handleTitleChange={handleTitleChange}
       ></InputWithLabel>
-      <button className={style.buttonAdd} type='submit'>
+      {/* Disable button if no typed input field. Otherwise, display pointer cursor */}
+      {todoTitle.length === 0 ? (<button className={style.buttonDisable} type='submit' disabled={!todoTitle}>
         + Add Song
-      </button>
+      </button>) : (<button className={style.buttonAdd} type='submit'>
+        + Add Song
+      </button>)}
+      {/* <button className={style.buttonAdd} type='submit' disabled={!todoTitle}>
+        + Add Song
+      </button> */}
     </form>
   );
 }

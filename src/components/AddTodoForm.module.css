@@ -10,6 +10,18 @@
   border-radius: 15px;
   cursor: pointer;
 }
+.buttonDisable {
+  background: none;
+  color: #acde00;
+  /* color: rgb(185, 189, 170); */
+  /* color: #9893d8; */
+  /* color: #b8e4ff; */
+  font-weight: 700;
+  padding: 6px 12px;
+  margin-top: 15px;
+  border-radius: 15px;
+  cursor: not-allowed;
+}
 .listForm {
   /* width 80% of the whole screen */
   width: 80%;
