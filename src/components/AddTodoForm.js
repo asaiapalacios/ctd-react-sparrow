@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import InputWithLabel from './InputWithLabel';
-
 import style from './AddTodoForm.module.css';
 import PropTypes from 'prop-types';
 
@@ -55,9 +54,6 @@ function AddTodoForm({ onAddTodo }) {
       </button>) : (<button className={style.buttonAdd} type='submit'>
         + Add Song
       </button>)}
-      {/* <button className={style.buttonAdd} type='submit' disabled={!todoTitle}>
-        + Add Song
-      </button> */}
     </form>
   );
 }
