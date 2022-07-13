@@ -22,8 +22,10 @@ function App() {
   // 3) Upon component initialization (loading/refreshing page):
 
   const [isAscending, setIsAscending] = useState(true);
-
-  // const navigate = useNavigate();
+  
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const request = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default?view=Grid%20view&sort[0][field]=Title&sort[0][direction]=asc`;
@@ -121,6 +123,22 @@ function App() {
   const handleSort = (sortFunc) => {
     let sortList = todoList.sort(sortFunc);
     setTodoList(sortList);
+  };
+
+  // For 'Get in Touch' form
+  const handleClick = e => {
+    // Prevent page refresh
+    e.preventDefault();
+    
+    // Access input values
+    console.log('fullName:', fullName);
+    console.log('email:', email);
+    console.log('message:', message);
+
+    // Clear all input values in the form after click 'Send Away'
+    setFullName('');
+    setEmail('');
+    setMessage('');
   };
 
   // 5) Create new todoList via fetch API POST request
@@ -241,18 +259,10 @@ function App() {
                   Enter your fave song. Watch as your
                   to-be playlist unfolds.
                 </p>
-                {/* <p className={style.leading}>
-                  Enter your fave but forgotten song. Add and watch as your
-                  updated list for your to-be playlist unfolds.
-                </p> */}
-
                 {/* 4) AddTodoForm instance:
                 -receives a passed object (current state of user input + unique no./id) after form is submitted
                 -> reference to the handler function addTodo is now invoked, passing object as an argument */}
                 <AddTodoForm onAddTodo={addTodo} />
-                {/* <button type='button' onClick={handleSort}>
-                  Asc/Desc
-                </button> */}
                 {/* 7) After passing todoList (array of objects) in its updated CURRENT form to TodoList component...
                 -TodoList instance receives back:
                   -> what user has typed & submitted in a <li> format, now ready to be rendered into React.DOM 
@@ -349,19 +359,31 @@ function App() {
                 <form>
                   <input
                     className={style.contactBorder}
+                    id='full_name'
+                    name='full_name'
                     type='text'
                     placeholder='NAME'
+                    onChange={e => setFullName(e.target.value)}
+                    value={fullName}
                   />
                   <input
                     className={style.contactBorder}
+                    id='email'
+                    name='email'
                     type='email'
                     placeholder='EMAIL'
+                    onChange={e => setEmail(e.target.value)}
+                    value={email}
                   />
                   <textarea
                     className={style.contactBorder}
+                    id='message'
+                    name='message'
                     placeholder='YOUR MESSAGE'
+                    onChange={e => setMessage(e.target.value)}
+                    value={message}
                   ></textarea>
-                  <button className={style.buttonNeon}>Send Away</button>
+                  <button className={style.buttonNeon} type='button' onClick={handleClick}>Send Away</button>
                 </form>
               </section>
               <footer>
