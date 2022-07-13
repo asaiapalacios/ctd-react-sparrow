@@ -23,6 +23,7 @@ function TodoListItem({ todo, onRemoveTodo }) {
 
 // TodoListItem.prototypes = {
 //   todo: PropTypes.object,
+//   onRemoveTodo: PropTypes.func,
 // };
 
 export default TodoListItem;

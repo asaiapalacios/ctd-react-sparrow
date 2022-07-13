@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-
 import style from './InputWithLabel.module.css';
 import PropTypes from 'prop-types';
 
