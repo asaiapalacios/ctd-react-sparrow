@@ -4,7 +4,6 @@ import TodoList from './components/TodoList';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import PropTypes from 'prop-types';
-
 import style from './App.module.css';
 import headphone from './headphone1.jpg';
 import cassette1 from './cassette1.jpg';
@@ -15,20 +14,22 @@ import { ReactComponent as Mail } from './mail.svg';
 import { FiGithub } from 'react-icons/fi'
 
 function App() {
-  // 1) Set initial state to an empty array upon component initialization
-  const [todoList, setTodoList] = useState([]);
-  // 2)
+  // Set initial states
+  const [todoList, setTodoList] = useState([]); // an empty array upon component initialization
   const [isLoading, setIsLoading] = useState(true);
-  // 3) Upon component initialization (loading/refreshing page):
-
   const [isAscending, setIsAscending] = useState(true);
-  
+
+  // Use tableName in place of url's Default for making Airtable requests (GET, POST, DELETE)
+  // Note: at Airtable's project page, we need to rename Default table first in order for the requests to sync up
+  const tableName = 'Jam Away';
+
+  // Initialize form
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    const request = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default?view=Grid%20view&sort[0][field]=Title&sort[0][direction]=asc`;
+    const request = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableName}?view=Grid%20view&sort[0][field]=Title&sort[0][direction]=asc`;
     const options = {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
@@ -48,32 +49,20 @@ function App() {
           data.records
         );
         
-        // -sort list in ascending order by Title
-        // console.log("Sort title in ascending order, A-Z:");
+        // -sort list in ascending order by Title (short version):
+        // const sortAsc = data.records.sort((objectA, objectB) => objectA.fields.Title - objectB.fields.Title);
+        // console.log('Data sorted by Title in ascending order, A-Z:', sortAsc);
 
-        // data.records.sort((objectA, objectB) => {
-        //   if (objectA.fields.Title < objectB.fields.Title) return -1;
-        //   if (objectA.fields.Title === objectB.fields.Title) return 0;          
-        //   if (objectA.fields.Title > objectB.fields.Title) return 1;
-        // });
+        // setTodoList(sortAsc);
 
-        // (short version):
-        // const sortData = data.records.sort((objectA, objectB) => objectA.fields.Title - objectB.fields.Title);
-        // console.log('Data sorted by Title:', sortData);
+        // OR 
+        // -sort list in descending order by Title (short version):
+        // const sortDesc = data.records.sort((objectA, objectB) => return objectB.fields.Title - objectA.fields.Title);
+        // console.log('Data sorted by Title in descending order, Z-A:' sortDesc);
 
-        // -OR sort list in descending order by Title
-        // console.log("Sort title in descending order, Z-A:");
-        // data.records.sort((objectA, objectB) => {
-        //   if (objectB.fields.Title < objectA.fields.Title) return -1;
-        //   if (objectB.fields.Title === objectA.fields.Title) return 0;          
-        //   if (objectB.fields.Title > objectA.fields.Title) return 1;
-        // });
-
-        // (short version)
-        // data.records.sort((objectA, objectB) => return objectB.fields.Title - objectA.fields.Title);
+        // setTodoList(sortDesc);
 
         // -update todoList from an empty array to current state (references the fetched JSON data)
-        // setTodoList(sortData);
         setTodoList(data.records);
 
         // -update isLoading state to false -> "Loading...One sec" text is no longer rendered
@@ -119,7 +108,7 @@ function App() {
       return 0;
     }
   }
-
+  // Pass function to compare objects for sorting, then set list
   const handleSort = (sortFunc) => {
     let sortList = todoList.sort(sortFunc);
     setTodoList(sortList);
@@ -142,9 +131,9 @@ function App() {
   };
 
   // 5) Create new todoList via fetch API POST request
-  // callback's parameter newTodo receives current state todoTitle w/in obj -> {fields: { Title: todoTitle }}
-  const addTodo = (newTodo) => {
-    const urlEndpt = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
+  // callback's parameter 'title' receives current state todoTitle w/in obj -> {fields: { Title: todoTitle }}
+  const addTodo = (title) => {
+    const urlEndpt = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableName}`;
     const postOptions = {
       method: 'POST',
       headers: {
@@ -152,9 +141,9 @@ function App() {
         'Content-Type': 'application/json',
       },
       // Convert object into a string to send it over a network (Airtable expects obj formatted this way)
-      // note: property records stores array of object [newTodo] -> {fields: { Title: todoTitle }}
+      // note: property records stores array of object [title] -> {fields: { Title: todoTitle }}
       body: JSON.stringify({
-        records: [newTodo],
+        records: [title],
       }),
     };
 
@@ -185,7 +174,7 @@ function App() {
 
   // 8) Remove clicked item via fetch API DELETE request passing todo.id argument (now as id parameter)
   const removeTodo = (id) => {
-    const urlEndpt = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default/${id}`;
+    const urlEndpt = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${tableName}/${id}`;
     const deleteOptions = {
       method: 'DELETE',
       headers: {
@@ -224,10 +213,10 @@ function App() {
             // Insert fragment use when you don't want to introduce an element (div) to satisfy React rules
             <>
               <nav className={`${style.grid} ${style.siteNav}`}>
-                <h1>Jam Away</h1>
+                <h1>{tableName}</h1>
                 <Link to='/jams'>
                   <button className={style.button}>
-                    <Mail title='Contact Me' />
+                    <Mail title='Contact' />
                   </button>
                 </Link>
               </nav>
@@ -274,18 +263,11 @@ function App() {
                 ) : (
                   <TodoList todoList={todoList} onRemoveTodo={removeTodo} sortTitle={sortTitle} handleSort={handleSort} />
                 )}
-                {/* <Link to='/jams'>
-                  <button className={style.buttonContact}>Get in Touch</button>
-                </Link> */}
               </section>
               <section className={style.spaceSection}>
                 <Link to='/jams'>
                   <button className={style.buttonContact}>Get in Touch</button>
                 </Link>
-          
-                {/* <a href='/jams'className={style.inTouch}>
-                    Get in Touch
-                </a> */}
               </section>
               <footer>
                 <div className={style.grid}>
@@ -317,13 +299,13 @@ function App() {
             </>
           }
         />
-        {/* Create a new Route w/path "/new" and a h1 w/text */}
+        {/* Create a new Route wtih path '/jams'; insert Airtable's default project name to h1 */}
         <Route
           path='/jams'
           element={
             <>
               <nav className={`${style.grid} ${style.siteNav}`}>
-                <h1>Jam Away</h1>
+                <h1>{tableName}</h1>
                 <Link to='/'>
                   <button className={style.button}>
                     <Home title='Home' />
@@ -424,6 +406,7 @@ function App() {
 export default App;
 
 App.protoTypes = {
+  tableName: PropTypes.string,
   sortTitle: PropTypes.func,
   handleSort: PropTypes.func,
 }
