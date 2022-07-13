@@ -9,7 +9,7 @@ function TodoList({ todoList, onRemoveTodo, handleSort, sortTitle }) {
 
   return (
     <ul>
-      {todoList.length !== 0 && <button className={style.buttonAscDesc} type='button' onClick={() => handleSort(sortTitle)}>
+      {(todoList.length !== 0 && todoList.length >= 2) && <button className={style.buttonAscDesc} type='button' onClick={() => handleSort(sortTitle)}>
         <TbArrowsUpDown size='1.2em' title='Sort' />
       </button>}
       {/* Note: todo is an object item with key:value pairs */}
