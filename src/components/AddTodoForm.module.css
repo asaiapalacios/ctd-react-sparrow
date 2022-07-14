@@ -1,25 +1,13 @@
-.buttonAdd {
+.buttonAdd, .buttonDisable {
   background: none;
   color: #acde00;
-  /* color: #9893d8; */
-  /* color: #b8e4ff; */
-  /* color: #fefefe; */
   font-weight: 700;
-  padding: 6px 12px;
-  margin-top: 15px;
+  padding: 8px 13px;
+  margin-top: 20px;
   border-radius: 15px;
   cursor: pointer;
 }
 .buttonDisable {
-  background: none;
-  color: #acde00;
-  /* color: rgb(185, 189, 170); */
-  /* color: #9893d8; */
-  /* color: #b8e4ff; */
-  font-weight: 700;
-  padding: 6px 12px;
-  margin-top: 15px;
-  border-radius: 15px;
   cursor: not-allowed;
 }
 .listForm {
@@ -27,12 +15,7 @@
   width: 80%;
   /* if device > 400px, this is the max it'll ever be */
   max-width: 400px;
-  /* cerntralize input field */
+  /* center input field */
   margin: 20px auto;
   text-align: center;
 }
-/* .contact input,
-.contact textarea {
-  width: 100%;
-  margin: 10px 0;
-} */
