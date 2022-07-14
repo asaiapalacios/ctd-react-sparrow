@@ -365,7 +365,7 @@ function App() {
                     onChange={e => setMessage(e.target.value)}
                     value={message}
                   ></textarea>
-                  <button className={style.buttonNeon} type='button' onClick={handleClick}>Send Away</button>
+                  <button className={style.buttonSend} type='button' onClick={handleClick}>Send Away</button>
                 </form>
               </section>
               <footer>

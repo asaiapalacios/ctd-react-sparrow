@@ -1,9 +1,3 @@
-/* global CSS styles */
-/* * {
-  padding: 0;
-  margin: 0;
-} */
-
 /* variables */
 :root {
   --primary: #b8e4ff;
@@ -40,8 +34,6 @@ textarea {
   padding: 10px 16px;
   border-radius: 20px;
   border: 1px solid #dddbff;
-  /* border: 2px solid #8581c0; */
-  /* border: 2px solid #9893d8; */
   color: #f2f2f2;
 }
 h1,
@@ -50,11 +42,7 @@ h3 {
   color: #dddbff;
   font-weight: normal;
 }
-/* h2 {
-  color: #8581c0;
-} */
 p {
-  /* color: #9893d8; */
   color: #dddbff;
   font-family: 'Roboto', sans-serif;
 }
@@ -77,89 +65,56 @@ h4 {
 .leading {
   font-size: 1em;
   margin-top: 5px;
-  /* color: #dddbff; */
 }
 .button {
   background: #88ade0;
   border: 2px solid #8581c0;
   border-radius: 20px;
-  /* before: w40px h40px */
   width: 35px;
   height: 35px;
 }
-.button, .buttonJam, .buttonContact, .buttonNeon {
+.button, .buttonJam, .buttonContact, .buttonSend {
   cursor: pointer;
 }
 .buttonJam {
   color: var(--primary);
   background: none;
-  /* background: var(--primary); */
   border: 2px solid var(--primary);
   padding: 6px 12px;
   border-radius: 20px;
   text-transform: uppercase;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
-  display: inline-block;
-  /* helps w/styling & adding some margin to it */
+  display: inline-block; /* helps w/styling & adding some margin to button */
   font-size: 11px;
 }
 .buttonJam:hover {
   color: #222;
-  background: #88ade0;
   background: var(--primary);
 }
 .buttonContact {
-  /* color: #acde00;
-  background: none;
-  border: 1px solid #acde00; */
-
   color: #222;
   background: #88ade0;
-  /* background: #acde00; */
   border: 2px solid var(--primary);
-
   padding: 6px 12px;
   border-radius: 20px;
   text-transform: uppercase;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
   display: inline-block;
-  /* helps w/styling & adding some margin to it */
   margin-top: 115px;
   font-size: 11px;
 }
-.buttonNeon {
+.buttonSend {
   color: #222;
   background: #88ade0;
-  /* background: #acde00; */
-  /* background: none; */
   border: 2px solid var(--primary);
-  /* color: #acde00; */
   padding: 6px 12px;
   border-radius: 20px;
   text-transform: uppercase;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
   display: inline-block;
-  /* helps w/styling & adding some margin to it */
   margin-top: 5px;
   font-size: 11px;
 }
-/* most likely REMOVE! */
-/* .inTouch {
-  ist color choice
-  color: #dddbff;
-  color: #ffffff;
-
-  helps w/styling & adding some margin to it
-  display: inline-block;
-
-  100% of the whole screen
-  width: 100%;
-  text-align: center;
-  margin-top: 220px;
-} */
-
-/* fonts */
-
 /* mobile styles */
 .grid {
   display: grid;
@@ -187,7 +142,6 @@ nav {
 .welcomeImg img {
   width: 108%;
   outline: 2px solid #8581c0;
-  /* outline: 2px solid #88ade0; */
   outline-offset: 2px;
 }
 .welcomeText button {
@@ -197,14 +151,6 @@ nav {
   background: #2e3347;
   padding: 30px 20px;
   text-align: center;
-
-  /* background: #30364d; */
-  /* background: #272c3f; */
-  /* background: #333951; */
-
-  /* background-size: cover; */
-  /* background-repeat: no-repeat;
-  background-position: bottom; */
 }
 .jamList h2,
 .jamList p {
@@ -217,13 +163,12 @@ nav {
   width: 80%;
   /* if device > 400px, this is the max it'll ever be */
   max-width: 400px;
-  /* cerntralize input field */
+  /* center input field */
   margin: 10px auto;
   text-align: center;
 }
 .skills {
   padding: 30px 20px;
-  /* background: #333951; */
   background: #30364d;
 }
 .skills h3 {
@@ -234,7 +179,6 @@ nav {
 }
 .skills li {
   padding: 10px;
-  /* background: rgba(0, 0, 0, 0.2); */
   /* each item takes up 4 columns in width */
   grid-column: span 4;
   text-align: center;
@@ -260,7 +204,6 @@ nav {
 }
 .contact {
   padding: 30px 20px;
-  /* background: #080936; */
 }
 .contact h3,
 .contact p {
@@ -270,7 +213,7 @@ nav {
 .contact form {
   /* width 80% of the whole screen */
   width: 80%;
-  /* if device is greater than 400px, this is the max itll ever be */
+  /* if device is greater than 400px, this is the max it'll ever be */
   max-width: 400px;
   /* center input fields and text area */
   margin: 20px auto;
@@ -285,9 +228,6 @@ footer {
   padding: 30px 20px;
   background-color: #1b1b41;
   border-top: 1px solid #8581c0;
-  /* border-top: 1px solid #b8da4a; */
-  /* border-top: 1px solid #ffe4c4; */
-  /* #14153d */
 }
 footer .copyright {
   grid-column: 1/3;
@@ -295,32 +235,19 @@ footer .copyright {
 }
 footer .social {
   grid-column: 7/9;
-  color: #dddbff;
-  /* color: white; */
+  /* color: #dddbff; */
   display: flex;
   justify-content: flex-end;
 }
 footer li {
   margin: 0 6px;
 }
-/* for svg? */
-/* footer img {
-  width: 20px;
-} */
 .linkSocial {
-  background: #ffffff;
-  outline: 2px solid #8581c0;
+  background: #d3d6f0;
   /* background: #c1c0db; */
-  /* border: 2px solid #acde00; */
-
-  /* background: #88ade0; */
-  /* border: 2px solid #88ade0; */
-  /* border: 2px solid var(--primary); */
-  /* color: var(--primary); */
+  outline: 2px solid #8581c0;
   padding: 6px 12px;
   border-radius: 20px;
-  /* box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6); */
-  /* helps w/styling & adding some margin to it */
   display: inline-block;
   height: 12px;
   width: 12px;
@@ -337,7 +264,7 @@ footer li {
     width: 40px;
     height: 40px;
   }
-  .buttonJam, .buttonContact, .buttonNeon {
+  .buttonJam, .buttonContact, .buttonSend {
     font-size: 13.3333px;
   }
   /* footer {
@@ -370,10 +297,8 @@ footer li {
   .welcome {
     padding-bottom: 40px;
   }
-  /* FIGURE out which padding you want */
   .skills {
     padding: 30px 200px;
-    /* padding: 30px 75px; */
   }
   .skills ul {
     margin: 40px auto;
@@ -386,7 +311,7 @@ footer li {
     width: 40px;
     height: 40px;
   }
-  .buttonJam, .buttonContact, .buttonNeon {
+  .buttonJam, .buttonContact, .buttonSend {
     font-size: 13.3333px;
   }
   footer {
@@ -413,7 +338,7 @@ footer li {
     width: 40px;
     height: 40px;
   }
-  .buttonJam, .buttonContact, .buttonNeon {
+  .buttonJam, .buttonContact, .buttonSend {
     font-size: 13.3333px;
   }
   footer {
