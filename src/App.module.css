@@ -185,11 +185,6 @@ nav {
   grid-column: span 4;
   text-align: center;
 }
-/* .skills img {
-  height: 180px;
-  border-radius: 50%;
-  margin: 10px auto;
-} */
 .cassetteStyle1 {
   height: 185px;
   width: 220px;
@@ -237,7 +232,6 @@ footer .copyright {
 }
 footer .social {
   grid-column: 7/9;
-  /* color: #dddbff; */
   display: flex;
   justify-content: flex-end;
 }
@@ -245,8 +239,7 @@ footer li {
   margin: 0 6px;
 }
 .linkSocial {
-  background: #d3d6f0;
-  /* background: #c1c0db; */
+  background: #e3e5f2;
   outline: 2px solid #8581c0;
   padding: 6px 12px;
   border-radius: 20px;
@@ -269,12 +262,6 @@ footer li {
   .buttonJam, .buttonContact, .buttonSend {
     font-size: 13.3333px;
   }
-  /* footer {
-    background-size: 20%;
-  } */
-  /* footer .copyright {
-    font-size: 0.9em;
-  } */
 }
 /* large tablet & laptop styles */
 @media screen and (min-width: 960px) {
@@ -305,10 +292,6 @@ footer li {
   .skills ul {
     margin: 40px auto;
   }
-  /* Note: already have this setting in mobile styles */
-  /* .skills li {
-    grid-column: span 4;
-  } */
   .button {
     width: 40px;
     height: 40px;
@@ -318,7 +301,6 @@ footer li {
   }
   footer {
     padding: 40px 20px;
-    /* background-size: 25%; */
   }
 }
 /* desktop styles */
