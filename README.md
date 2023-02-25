@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/asaiapalacios">creator: Asaia Palacios</a>
+  <a href="https://github.com/asaiapalacios">Asaia Palacios</a>
 </p>
 
 ## About Jam Away
@@ -15,10 +15,10 @@ _Jam Away_ invites users to jot down their long-lost songs, creating a list that
 
 ### Features
 - Responsiveness for desktop, laptop and mobile
-- Accessibility labels when mouse hovers over the 'Contact' button and 'Home' button
+- Accessibility, descriptive labels when mouse hovers over the 'Contact' button and 'Home' button
 - Button background-color change when mouse hovers over 'LET'S JAM'
-- Upon clicking this call-to-action button, a scroll-down sliding behavior occurs to direct the user to the 'Jam List'
-- Here, in the text field, user can jot down their fave song. By pressing the '+ Add Song' button or by hitting the Enter keyboard, user's song list is displayed (Note: button is disabled if no song is typed in the text field)
+- Upon clicking this call-to-action button, a scroll-down sliding behavior occurs to redirect the user to the 'Jam List' section
+- Here, in the text field, user can jot down their fave song. By pressing the '+ Add Song' button or by hitting the Enter keyboard, user's song list is displayed. Note: button is disabled if no song is typed in the text field
 
 <p align="center">
   <picture>
@@ -45,7 +45,7 @@ _Jam Away_ invites users to jot down their long-lost songs, creating a list that
   </picture>    
 </p>
 
- - The footer section includes a GitHub and LinkedIn buttons that upon selecting either one, user is redirected to these URLs (a new tab window opens)
+ - The footer section includes GitHub and LinkedIn buttons that upon selecting either one, user is redirected to these URLs (a new tab window opens)
 ## Built With
 - React.js
   - libraries: prop-types, react-router-dom and react-router-hash-link
